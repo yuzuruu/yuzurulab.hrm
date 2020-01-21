@@ -43,6 +43,10 @@ ggpairs(catsle.transportation) +
   theme_classic()
 
 
+<<<<<<< matsui
+library(tidyverse)
+=======
+
 #　松井さんが書いたコード
 # cor(hoge[,c(5,6,11,12)])
 # hoge
@@ -54,3 +58,5 @@ ggpairs(catsle.transportation) +
 # library(GGally)
 # 
 # ggpairs(piyo)
+>>>>>>> master
+
