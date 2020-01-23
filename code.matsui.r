@@ -60,3 +60,10 @@ library(tidyverse)
 # ggpairs(piyo)
 >>>>>>> master
 
+#モデルを組む
+model1 <-
+  lm(total.population ~ traf + ct, data = catsle.transportation)
+
+
+summary(model1)
+
