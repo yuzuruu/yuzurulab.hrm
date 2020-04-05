@@ -1,0 +1,143 @@
+---
+title: "第4章　Rの基礎"
+subtitle: "Lander, J. P. (2017). *R for everyone* (2nd. Ed.). Pearson."
+author: "宇都宮　譲　Yuzuru Utsunomiya, Ph. D."
+date: "`r Sys.time()`"
+output:
+  ioslides_presentation:
+    css: ./css/slide.css
+    widescreen: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Rの基本
+
+## Rはコードで動く
++ コード＝プログラム
++ マウスを使うことはほとんどない。
++ RStudioには便利なショートカットキーがいっぱい
+    - Help $\rightarrow$ Cheatsheets $\rightarrow$ RStudio IDE Cheat Sheet
+    - 朝な夕なに拝めて使おう
++ わからなくなったらGoogleに尋ねるか関数前に?をつけて実行　例）?mean
+
+## コードを書く
+1. Projectをつくる
+    - File $\rightarrow$ New Project $\rightarrow$ New Directory $\rightarrow$ New Project
+2. .rファイルをつくる
+    - File $\rightarrow$ New file $\rightarrow$ R sctipt
+    - **Ctrl + Shift + n**でもよい。
+3. 書いてすぐに**Ctrl + s**
+4. **Ctrl + Enter**で実行
+
+## コメント | 灰色箇所がコード。書いて選択して**Ctrl + Enter**で実行
++ #を書いた後のコードは実行されない
++ なにかと細かくメモを書いて、明日の自分にいいお手紙
++ コメントアウトしたい箇所を選択、**Ctrl + Shift + c**でコメントアウト
+
+```{r iris}
+# irisデータをみる
+iris
+```
+
+## Comment out | 灰色箇所がコード。書いて選択して**Ctrl + Enter**で実行
+```{r comment.out}
+# 行頭に#を書けばirisデータをみない
+# iris
+```
+
+## 計算 | 灰色箇所がコード。書いて選択して**Ctrl + Enter**で実行
++ 電卓代わりに使える。四則演算やが使える。
+    - 計算順序はいわゆるPEMDAS（カッコ、指数、乗算、除算、加算、減算）
+    - 演算子や記号を置いたら半角空白を空けると後から読みやすいコードになる
+```{r calculation}
+# いちたすにたすさんはいくつかな
+1 + 2 + 3
+```
+
+## 変数と代入 | 灰色箇所がコード。書いて選択して**Ctrl + Enter**で実行
++ 読んで字の如し 
+    - **<-** 記号で、右側にある値を左側にある変数に代入する。
+    - 変数名は任意につくってもよい
+    - 大文字と小文字を区別する
+
+```{r variable}
+# xに3を代入する
+x <- 3
+x
+y <- 1+2+3
+y
+```
+
+## データ型 | 灰色箇所がコード。書いて選択して**Ctrl + Enter**で実行
++ データを何に使うかRに教える
+    - numeric（数値）, character（文字列や名義尺度的に使う数字）, factor（因子あるいは要因）, Date / POSIXct(日付)
+    - **class()**を使ってデータ型（変数型）を調べる
+    - 変数型は変更できる
+```{r scale}
+class(x)
+x.character <- as.character(x)
+class(x.character)
+```
+
+## ベクトル | 灰色箇所がコード。書いて選択して**Ctrl + Enter**で実行
++ 同じデータ型をもつ要素をあつめたもの
+
+```{r vector}
+# ベクトルが使えるといいことしかない。xに1から10までの値を代入。
+x <- c(1,2,3,4,5,6,7,8,9,10)
+x
+x <- c(1:10)
+x
+```
+
+## ベクトル演算 | 灰色箇所がコード。書いて選択して**Ctrl + Enter**で実行
++ ベクトルどうし演算できる。
+
+```{r vector.02}
+x <- c(1,2,3,4,5,6,7,8,9,10)
+3*x
+log(x)
+```
+
+## 関数とパイプ | 灰色箇所がコード。書いて選択して**Ctrl + Enter**で実行
++ 直前（左側）の変数を直後（右側）の関数の引数に代入
+    - コードの可読性が高くなる。ほどほどに
+    - なにもしなければ第一変数。指定するなら.を使う
+
+```{r pipe, include=TRUE, echo=TRUE, warning=FALSE, message=FALSE}
+# tidyverse()ライブラリを読み込む。
+# なければinstall.packages("tidyverse")を実行する
+library(tidyverse)
+# パイプ。引数とは関数がどう動作するか決める設定みたいなもの
+mean.x <- 
+  x %>% 
+  sum()
+mean.x
+```
+
+## 練習問題
+1. 1から100までの数を変数xに代入、対数変換してから総和を求める
+2. 1から1,000,000までの偶数（0を除く）を変数yに代入、平方根を求めて総和を求める
+
+## 解答1 
+
+```{r assignment.04.01}
+x <- c(1:100)
+x %>% 
+  log() %>% 
+  sum()
+```
+
+## 解答2
+
+```{r assignment.04.02}
+# 1から1,000,000までの数を生成するしてyに代入
+y <- c(1:1000000)
+# 偶数のみ選ぶ=2で割った余りが0でかつ0ではない数を抽出
+y[y %% 2 == 0 & y != 0] %>% 
+  sqrt() %>% #sqrt()は平方根を求める関数。コメントはここにも書ける
+  sum()
+```
