@@ -131,6 +131,8 @@ x %>%
   sum()
 ```
 
+hoge
+
 ## 解答2
 
 ```{r assignment.04.02}
