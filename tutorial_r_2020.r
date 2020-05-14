@@ -5,7 +5,7 @@
 
 # ---- load.library ----
 library(tidyverse)
-library(kokudosuuchi)
+library(jpndistrict)
 library(sf)
 library(mapview)
 
